@@ -61,7 +61,19 @@ if(cliLocation){
     /// use the CLI, we found it earlier on.
 
     var child_process = require("child_process");
-    var lint = child_process.spawnSync("node", [cliLocation, process.argv[2] ]);
+
+    /// Determine which syntax to use based on file extension
+    var syntax = "css";
+
+    if (/\.less$/.test(process.argv[2])) {
+      syntax = "less"
+    } else if (/\.scss$/.test(process.argv[2])) {
+      syntax = "scss"
+    } else if (/\.sss$/.test(process.argv[2])) {
+      syntax = "sugarss"
+    }
+
+    var lint = child_process.spawnSync("node", [cliLocation, process.argv[2], "--syntax", syntax]);
     /// re-route the stdout to ours
     console.log(String(lint.stdout) + String(lint.stderr));
 }

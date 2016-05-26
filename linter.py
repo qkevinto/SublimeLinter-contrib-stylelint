@@ -17,7 +17,7 @@ from SublimeLinter.lint import Linter, util
 class Stylelint(Linter):
     """Provides an interface to stylelint."""
 
-    syntax = ('css', 'css3', 'sass', 'scss', 'postcss')
+    syntax = ('css', 'css3', 'sass', 'scss', 'postcss', 'less')
     cmd = ('node', os.path.dirname(os.path.realpath(__file__)) + '/stylelint_wrapper.js', '@')
     error_stream = util.STREAM_BOTH
     config_file = ('--config', '.stylelintrc', '~')
